@@ -11,6 +11,8 @@ import { AuthService } from './../../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  loading: boolean=false;
+
   form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
@@ -34,5 +36,8 @@ export class LoginComponent {
         this.router.navigate(['/admin']);
       });
     }
+  }
+  register(){
+    this.router.navigate(['/register']);
   }
 }

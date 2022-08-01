@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
 
@@ -26,13 +26,24 @@ export class AuthService {
 
 
 
+  // login(email: string, password: string) {
+  //   const url = `${environment.API_URL}/user/authenticate`;
+  //   return this.http.post<LoginRta>(url, { email, password } )
+  //   .pipe(
+  //     tap(response => this.tokenService.saveToken(response.access_token)),
+  //     switchMap(_ => this.getProfile()),
+  //     tap(user => this.authState.next(user))
+  //   )
+  // }
+  
   login(email: string, password: string) {
-    const url = `${environment.API_URL}/auth/login`;
-    return this.http.post<LoginRta>(url, {email, password})
+    const url = `${environment.API_URL}/user/authenticate`;
+    return this.http.post<LoginRta>(url, { email, password } )
     .pipe(
-      tap(response => this.tokenService.saveToken(response.access_token)),
-      switchMap(_ => this.getProfile()),
-      tap(user => this.authState.next(user))
+      tap(response => {
+        this.tokenService.saveToken(response.access_token)
+        this.authState.next(response.user)
+      })
     )
   }
 
@@ -41,8 +52,14 @@ export class AuthService {
   }
 
   getProfile() {
-    const url = `${environment.API_URL}/auth/profile`;
+    const url = `${environment.API_URL}/user/profile`;
     return this.http.get<User>(url);
+  }
+
+  getAll() {
+    const headers = new HttpHeaders().set('content-type', 'application/json');
+    const url = `${environment.API_URL}/user`;
+    return this.http.get<User[]>(url,{headers});
   }
 
 

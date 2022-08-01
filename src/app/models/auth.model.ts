@@ -1,5 +1,6 @@
 export interface LoginRta {
   access_token: string;
+  user:User;
 }
 
 export interface User {
