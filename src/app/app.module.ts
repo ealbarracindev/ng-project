@@ -14,6 +14,8 @@ import { FormComponent } from './pages/form/form.component';
 
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 
+import { LoggerModule } from 'ngx-logger';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,12 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor';
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LoggerModule.forRoot({
+      //serverLoggingUrl: `${environment.API_URL}/v1/logs`,
+      level: environment.logLevel,
+      serverLogLevel: environment.serverLogLevel      
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

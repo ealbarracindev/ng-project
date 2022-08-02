@@ -22,11 +22,17 @@
           </div>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="primary" type="submit"
+          [disabled]=".invalid || loading"
+          >Submit</button>
+          <button mat-raised-button color="basic" 
+                                        class="button" type="button" 
+                                        (click)="register()">Registrarse
+          </button>    
         </mat-card-actions>
       </form>
     </mat-card>
-
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 </div>
 
 
