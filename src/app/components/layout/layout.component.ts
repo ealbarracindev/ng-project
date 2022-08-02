@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { AuthService } from './../../services/auth.service';
-import { User } from './../../models/auth.model';
+import { AuthService } from '../../core/services/auth.service';
+import { User } from '../../core/models/auth.model';
 
 @Component({
   selector: 'app-layout',

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
 
-import { environment } from './../../environments/environment';
-import { LoginRta, User } from './../models/auth.model';
-import { TokenService } from './../services/token.service';
+import { environment } from '../../../environments/environment';
+import { LoginRta, User } from '../models/auth.model';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +36,7 @@ export class AuthService {
   //   )
   // }
   
-  login(email: string, password: string) {
+  login(email: string, password: string):Observable<LoginRta> {
     const url = `${environment.API_URL}/user/authenticate`;
     return this.http.post<LoginRta>(url, { email, password } )
     .pipe(
@@ -56,10 +56,10 @@ export class AuthService {
     return this.http.get<User>(url);
   }
 
-  getAll() {
-    const headers = new HttpHeaders().set('content-type', 'application/json');
+  getAll():Observable<User[]> {
+    //const headers = new HttpHeaders().set('content-type', 'application/json');
     const url = `${environment.API_URL}/user`;
-    return this.http.get<User[]>(url,{headers});
+    return this.http.get<User[]>(url);
   }
 
 

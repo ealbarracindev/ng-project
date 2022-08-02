@@ -7,7 +7,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { FormComponent } from './pages/form/form.component';
 import { AboutComponent } from './pages/about/about.component';
 
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
