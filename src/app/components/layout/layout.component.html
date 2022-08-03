@@ -13,17 +13,23 @@
    </mat-list>
     <mat-nav-list>
       <h3 mat-subheader>Menu</h3>
-      <a mat-list-item routerLink="/admin/dashboard">
+      <a mat-list-item routerLink="/dashboard">
         <mat-icon mat-list-icon>dashboard</mat-icon>
         Dashboard
       </a>
-      <a mat-list-item routerLink="/admin/form">
+      <a mat-list-item routerLink="/form">
         <mat-icon mat-list-icon>dns</mat-icon>
         Form
       </a>
-      <a mat-list-item routerLink="/admin/about">
+      <a mat-list-item routerLink="/about">
         <mat-icon mat-list-icon>dns</mat-icon>
         About
+      </a>
+      <a mat-list-item [routerLink]="['/account']" routerLinkActive="active">
+        <mat-icon mat-list-icon>
+          people
+        </mat-icon>
+        <p mat-line> Users </p>
       </a>
       <a mat-list-item (click)="logout()">
         <mat-icon mat-list-icon>logout</mat-icon>

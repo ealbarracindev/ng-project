@@ -2,11 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LayoutComponent } from './components/layout/layout.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { LoginComponent } from './pages/login/login.component';
-import { FormComponent } from './pages/form/form.component';
-import { AboutComponent } from './pages/about/about.component';
-
 import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
@@ -16,37 +11,43 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'admin',
+    path: 'login',
+    loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule),        
+    title: 'App - Login'
+  },
+  {
+    path: ``,
     canActivate: [AuthGuard],
-    component: LayoutComponent,
+    component: LayoutComponent,    
     children: [
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
-      },
+      // {
+      //   path: '',
+      //   redirectTo: 'dashboard',
+      //   pathMatch: 'full',
+      //   loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule),        
+      // },
       {
         path: 'dashboard',
-        component: DashboardComponent,
-        title: 'App - Dashboard'
+        loadChildren: () => import('./pages/dashboard/dashboard.module').then((m) => m.DashboardModule),        
+        title: 'App - Dashboard Lazy loading'
       },
       {
         path: 'form',
-        component: FormComponent,
+        loadChildren: () => import('./pages/form/form.module').then((m) => m.FormModule),    
         title: 'App - Form'
       },
       {
         path: 'about',
-        component: AboutComponent,
+        loadChildren: () => import('./pages/about/about.module').then((m) => m.AboutModule), 
         title: 'App - About'
+      },
+      {
+        path: 'account',
+        loadChildren: () => import('./pages/account/account.module').then((m) => m.AccountModule), 
+        title: 'App - Account'
       }
     ]
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-    title: 'App - Login'
-  }
+  }  
 ];
 
 @NgModule({

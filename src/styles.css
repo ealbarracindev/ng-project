@@ -2,3 +2,21 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.animate {
+    animation-name: show;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+/*--------form, tables material -----------*/
+.mat-form-field {
+  font-size: 14px;
+  width: 90%;
+}  
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}

@@ -37,7 +37,7 @@ export class LayoutComponent implements OnInit {
   change() {
     this.authService.setAuthState({
       ...this.user as User,
-      name: 'NICO'
+      name: 'javi-SC'
     });
   }
 
