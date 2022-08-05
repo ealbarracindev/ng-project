@@ -40,8 +40,8 @@ export class AuthService {
     const url = `${environment.API_URL}/user/authenticate`;
     return this.http.post<LoginRta>(url, { email, password } )
     .pipe(
-      tap(response => {
-        this.tokenService.saveToken(response.access_token)
+      tap( (response:LoginRta) => {
+        this.tokenService.saveData(response)
         this.authState.next(response.user)
       })
     )
