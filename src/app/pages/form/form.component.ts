@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { NotificationService } from 'src/app/core/services/notification.service';
+import { SelectModel } from '../../core/models/select-model';
 
+export interface State{
+  abbreviation:string;
+  name:string;
+}
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -23,7 +29,7 @@ export class FormComponent {
 
   hasUnitNumber = false;
 
-  states = [
+  states:State[] = [
     {name: 'Alabama', abbreviation: 'AL'},
     {name: 'Alaska', abbreviation: 'AK'},
     {name: 'American Samoa', abbreviation: 'AS'},
@@ -85,9 +91,40 @@ export class FormComponent {
     {name: 'Wyoming', abbreviation: 'WY'}
   ];
 
-  constructor(private fb: UntypedFormBuilder) {}
+  constructor(private fb: UntypedFormBuilder,private snackService: NotificationService,) {}  
 
   onSubmit(): void {
-    alert('Thanks!');
+    this.snackService.default('Thanks!');
+  }
+
+  filteredDataToSearch: any[] = [];
+  selectedAreas: State[] = this.states;
+
+  search(event: Event){
+    let value1 = (event.target as HTMLInputElement).value;
+    console.log('query', value1)
+    let result = this.select(value1)
+    this.states = result;
+  }
+
+  private select(query: string):State[]{
+    let result: State[] = [];
+    for(let a of this.states){
+      if(a.name.toLowerCase().indexOf(query) > -1){
+        result.push(a)
+      }
+    }
+    return result
+  }
+  //TODO: Limpiar el input
+  clean(inputFilter:any){
+    console.log(inputFilter);
+
+  }
+
+  placeHolder:string='Bancks';
+  selections:SelectModel[]=this.convertToSelectModel();
+  convertToSelectModel():Array<SelectModel>{
+     return this.states.map( s =>({ id:s.abbreviation, descripcion:s.name }));
   }
 }

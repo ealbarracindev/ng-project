@@ -23,11 +23,13 @@ import { LoggerModule } from 'ngx-logger';
 import { environment } from 'src/environments/environment';
 import { LayoutComponent } from './components/layout/layout.component';
 import { CoreModule } from './core/core.module';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LayoutComponent    
+    LayoutComponent,
+    BreadcrumbsComponent   
   ],
   imports: [
     // angular
@@ -52,6 +54,9 @@ import { CoreModule } from './core/core.module';
     MatListModule,
     MatCardModule,
     MatMenuModule
+  ],
+  exports:[
+    BreadcrumbsComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

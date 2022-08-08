@@ -12,16 +12,16 @@
       <mat-divider></mat-divider>
    </mat-list>
     <mat-nav-list>
-      <h3 mat-subheader>Menu</h3>
-      <a mat-list-item routerLink="/dashboard">
+      <!-- <h3 mat-subheader>Menu</h3> -->
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
         <mat-icon mat-list-icon>dashboard</mat-icon>
         Dashboard
       </a>
-      <a mat-list-item routerLink="/form">
+      <a mat-list-item routerLink="/form" routerLinkActive="active">
         <mat-icon mat-list-icon>dns</mat-icon>
         Form
       </a>
-      <a mat-list-item routerLink="/about">
+      <a mat-list-item routerLink="/about" routerLinkActive="active">
         <mat-icon mat-list-icon>dns</mat-icon>
         About
       </a>
@@ -35,7 +35,7 @@
         <mat-icon mat-list-icon>logout</mat-icon>
         Logout
       </a>
-      <button (click)="change()">change</button>
+      <!-- <button (click)="change()">change</button> -->
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -48,8 +48,9 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>angular-auth</span>
+      <span>demo-angular</span>
     </mat-toolbar>
+    <sc-breadcrumbs></sc-breadcrumbs>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

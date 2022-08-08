@@ -29,3 +29,28 @@
 .col:last-child {
   margin-right: 0;
 }
+
+p {
+  font-family: Lato;
+}
+
+.inp {
+  width: 360px;
+}
+
+.parent {
+  position: relative;
+}
+
+.child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fixed{
+    position: sticky;
+    top:0;
+    z-index: 999;
+}

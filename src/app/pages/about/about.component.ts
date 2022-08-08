@@ -12,12 +12,12 @@ import { FormsModule } from '@angular/forms';
 })
 export class AboutComponent implements OnInit {
 
-  name = 'nicolas';
+  name = 'simple code';
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log('init');
+    //console.log('init');
     this.name = '';
   }
 

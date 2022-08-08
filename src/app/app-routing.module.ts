@@ -18,7 +18,8 @@ const routes: Routes = [
   {
     path: ``,
     canActivate: [AuthGuard],
-    component: LayoutComponent,    
+    component: LayoutComponent, 
+    data:{breadcrumb:'dashboard'},   
     children: [
       // {
       //   path: '',
@@ -28,22 +29,23 @@ const routes: Routes = [
       // },
       {
         path: 'dashboard',
-        loadChildren: () => import('./pages/dashboard/dashboard.module').then((m) => m.DashboardModule),        
+        loadChildren: () => import('./pages/dashboard/dashboard.module').then((m) => m.DashboardModule)
+        ,data:{breadcrumb:'dashboard'},        
         title: 'App - Dashboard Lazy loading'
       },
       {
         path: 'form',
-        loadChildren: () => import('./pages/form/form.module').then((m) => m.FormModule),    
+        loadChildren: () => import('./pages/form/form.module').then((m) => m.FormModule),data:{breadcrumb:'form'},      
         title: 'App - Form'
       },
       {
         path: 'about',
-        loadChildren: () => import('./pages/about/about.module').then((m) => m.AboutModule), 
+        loadChildren: () => import('./pages/about/about.module').then((m) => m.AboutModule),data:{breadcrumb:'about'},   
         title: 'App - About'
       },
       {
         path: 'account',
-        loadChildren: () => import('./pages/account/account.module').then((m) => m.AccountModule), 
+        loadChildren: () => import('./pages/account/account.module').then((m) => m.AccountModule),data:{breadcrumb:'account'},   
         title: 'App - Account'
       }
     ]

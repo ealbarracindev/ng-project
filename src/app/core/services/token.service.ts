@@ -23,7 +23,7 @@ export class TokenService {
     
   }
 
-  getCurrentToken(): Token {
+  currentToken(): Token {
     // TODO: Enable after implementation
    const { access_token } = JSON.parse(localStorage.getItem('currentUser')!);
    const token:Token={ access_token }
@@ -34,10 +34,10 @@ export class TokenService {
   isTokenExpired():boolean { 
     const { access_token } = JSON.parse(localStorage.getItem('currentUser')!);
     if (this.jwtHelper.isTokenExpired(access_token)) {
-      console.log(true, 'token is not expired')
+      console.log(true, 'token is expired')
       return true;
     } else { 
-      console.log(false, 'token is expired') 
+      console.log(false, 'token is not expired') 
       return false;
     }
   }

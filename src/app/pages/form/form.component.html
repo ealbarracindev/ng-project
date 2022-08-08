@@ -79,6 +79,38 @@
         </div>
         <div class="row">
           <div class="col">
+            <mat-form-field class="col-sm-4 inp">
+							<mat-select  placeholder="Auto Focus" formControlName="state"  (openedChange)="inputFilter.focus()">         
+                  <div class="fixed">
+                    <mat-form-field class="full-width" [floatLabel]="'never'" style="margin: 5px;padding-left: 10px;padding-right: 10px;
+                    border: 1.5px solid rgba(216, 220, 230, 0.87); border-radius: 5px;
+                    position: absolute;top: 0;width: calc(100% - 30px);background: white;z-index: 100;height:65px;">
+                      <input matInput placeholder="" style="padding-left:10px" (keyup)="search($event)" #inputFilter>
+                      <i matPrefix><mat-icon>search</mat-icon></i>
+                      <i matSuffix (click)="clean(inputFilter);"><mat-icon>close</mat-icon></i>
+                    </mat-form-field>
+                </div>
+                <div style="padding-top: 80px">
+                  <mat-option *ngFor="let state of states" [value]="state.abbreviation">
+                    {{ state.name }}
+                  </mat-option>
+                </div>
+            </mat-select>
+            <mat-error *ngIf="addressForm.controls['state'].hasError('required')">
+              State is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          </div>
+          <div class="col">
+            <sc-single-selection 
+              [placeholderLabel]="placeHolder"
+              [selection]="selections"
+              >
+            </sc-single-selection>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
             <mat-form-field class="full-width">
               <input matInput #postalCode maxlength="5" placeholder="Postal Code" type="number" formControlName="postalCode">
               <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
