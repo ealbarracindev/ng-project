@@ -1,0 +1,19 @@
+<mat-form-field class="col-sm-4 inp">
+    <mat-select  placeholder={{placeholderLabel}} (openedChange)="inputFilter.focus()">         
+        <div class="fixed">
+            <mat-form-field class="full-width input-search" [floatLabel]="'never'" 
+            >
+                <input matInput placeholder="" style="padding-left:10px" 
+                (keyup)="search($event)" #inputFilter>
+                <i matPrefix><mat-icon>search</mat-icon></i>
+                <i matSuffix (click)="clean(inputFilter);"><mat-icon>close</mat-icon></i>
+            </mat-form-field>
+        </div>
+        <div style="padding-top: 80px">
+            <mat-option *ngFor="let item of selection" [value]="item.id">
+            {{ item.descripcion }}
+            </mat-option>
+        </div>
+    </mat-select>
+<!-- d -->
+</mat-form-field>

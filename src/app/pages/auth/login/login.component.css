@@ -1,0 +1,53 @@
+.container {
+  /* background-color: #3f51b5; */
+  background: linear-gradient(-225deg, rgba(0,0,0,0.6) 50%, rgba(0,36,61,0.6) 80%),
+  /* url(../../../assets/img/auth/login_bg.jpg); */
+  url(../../../../assets/img/auth/login_bg.jpg);
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+  height: 100vh;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.login-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+}
+.login-card form {
+  padding: 20px;
+}
+/*============================
+  Container
+==============================*/
+.login-container {
+  height: 100vh;
+}
+/*=============================
+picture wrapper 
+===============================*/
+.login-picture-wrapper{
+  background: linear-gradient(-225deg, rgba(0,0,0,0.6) 50%, rgba(0,36,61,0.6) 80%),
+  /* url(../../../assets/img/auth/login_bg.jpg); */
+  url(../../../../assets/img/auth/login_bg.jpg);
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/*=============================
+gradient background 
+===============================*/
+.login-background{
+  background: #355C7D;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #C06C84, #6C5B7B, #355C7D);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #C06C84, #6C5B7B, #355C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}

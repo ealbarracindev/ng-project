@@ -1,0 +1,13 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none" *ngIf="breadcrumbs.length">
+    <div fxFlex="95%">
+      <ul class="breadcrumb" *ngIf="breadcrumbs.length>0">
+          <li *ngFor="let breadcrumb of breadcrumbs"
+              class="breadcrumb-item">
+            <a [routerLink]='[breadcrumb.url, breadcrumb.params]' 
+              routerLinkActive='active'>{{ breadcrumb.label }}
+            </a>
+          </li>
+      </ul>
+    </div>
+  </div>
+    
