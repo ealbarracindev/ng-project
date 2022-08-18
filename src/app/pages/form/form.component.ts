@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
-import { NotificationService } from 'src/app/core/services/notification.service';
-import { SelectModel } from '../../core/models/select-model';
+import { MessageService } from '@coreservices/message.service';
+import { SelectModel } from '@core/models/select-model';
 
 export interface State{
   abbreviation:string;
@@ -91,7 +91,7 @@ export class FormComponent {
     {name: 'Wyoming', abbreviation: 'WY'}
   ];
 
-  constructor(private fb: UntypedFormBuilder,private snackService: NotificationService,) {}  
+  constructor(private fb: UntypedFormBuilder,private snackService: MessageService,) {}  
 
   onSubmit(): void {
     this.snackService.default('Thanks!');

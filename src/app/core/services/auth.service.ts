@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Observable, catchError, of, throwError } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
 
-import { environment } from '../../../environments/environment';
-import { LoginRta, User } from '../models/auth.model';
+import { environment as env } from '@env/environment';
+import { LoginRta, User, UserInfo } from '@core/models/auth.model';
 import { TokenService } from './token.service';
+import { IRegister } from '@pagesauth/register/register';
+import { ReqResponseData } from '@coremodels/req-response-data';
+import { IRegisterResponse } from '@pagesauth/register/register-response';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +22,7 @@ export class AuthService {
     private http: HttpClient,
     private tokenService: TokenService
   ) {
-    this.getProfile().subscribe(user => {
-      this.authState.next(user)
-    });
+    
   }
 
 
@@ -35,15 +36,60 @@ export class AuthService {
   //     tap(user => this.authState.next(user))
   //   )
   // }
-  
+  // setProfile(){
+  //   this.getProfile().subscribe(user => {
+  //     this.authState.next(user)
+  //   });
+  // }
   login(email: string, password: string):Observable<LoginRta> {
-    const url = `${environment.API_URL}/user/authenticate`;
+    const url = `${env.API_URL}/user/authenticate`;
     return this.http.post<LoginRta>(url, { email, password } )
     .pipe(
       tap( (response:LoginRta) => {
-        this.tokenService.saveData(response)
-        this.authState.next(response.user)
+        
+        if(!response) return of(response); // or any other stream like of('') etc.
+        
+        this.tokenService.saveData(response);
+        this.authState.next(response.user);
+        return response;
       })
+      // catchError(
+      //     (error: HttpErrorResponse): Observable<any> => {
+      //         // we expect 404, it's not a failure for us.
+      //         if (error.status === 404) {
+      //             return of(null); // or any other stream like of('') etc.
+      //         }
+  
+      //         // other errors we don't know how to handle and throw them further.
+      //         return throwError(()=>error);
+      //     },
+      // ),
+    )
+  }
+
+  register(register:IRegister){
+    const {email, password}=register;
+    return this.http.post<LoginRta>(`${env.API_URL}/user/register`,{ email,password })
+    .pipe(
+      tap( (response:LoginRta) => {
+        
+        if(!response) return of(response); // or any other stream like of('') etc.
+        
+        this.tokenService.saveData(response);
+        this.authState.next(response.user);
+        return response;
+      }),
+      catchError(
+          (error: HttpErrorResponse): Observable<any> => {
+              // we expect 404, it's not a failure for us.
+              if (error.status === 404) {
+                  return of(null); // or any other stream like of('') etc.
+              }
+  
+              // other errors we don't know how to handle and throw them further.
+              return throwError(()=>error);
+          },
+      ),
     )
   }
 
@@ -52,13 +98,19 @@ export class AuthService {
   }
 
   getProfile() {
-    const url = `${environment.API_URL}/user/profile`;
+    const url = `${env.API_URL}/user/profile`;
     return this.http.get<User>(url);
   }
 
+  currentUser():UserInfo | null{
+    let current = localStorage.getItem('currentUser');
+    if(!current) return null;
+    
+    const { email, alias, fullName }:UserInfo = JSON.parse(current!);
+    return { email,alias,fullName };
+  }
   getAll():Observable<User[]> {
-    //const headers = new HttpHeaders().set('content-type', 'application/json');
-    const url = `${environment.API_URL}/user`;
+    const url = `${env.API_URL}/user`;
     return this.http.get<User[]>(url);
   }
 
@@ -66,4 +118,19 @@ export class AuthService {
   logout() {
     this.tokenService.clearToken();
   }
+
+  passwordResetRequest(email: string) {
+    return of(true);
+  }
+
+  changePassword(email: string, currentPwd: string, newPwd: string) {
+      //return of(true).delay(1000);
+      return of(true);
+  }
+
+  passwordReset(email: string, token: string, password: string, confirmPassword: string): any {
+      //return of(true).delay(1000);
+      return of(true);
+  }
+
 }

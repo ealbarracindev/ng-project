@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.authService.authState$
     .subscribe(user => {
-      console.log('change');
+      console.log('change',user);
       this.user = user;
     });
   }

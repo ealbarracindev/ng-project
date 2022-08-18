@@ -1,0 +1,42 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+@import './themes/default-theme';
+@import './themes/light-theme';
+@import './themes/black-theme';
+@import './themes/nature-theme';
+
+.light-mode {
+  @include angular-material-theme($anms-light-theme);
+}
+
+.dark-mode {
+  @include angular-material-theme($anms-black-theme);
+
+  background-color: #333;
+  color: whitesmoke;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+/* ------ notifications -------- */
+
+.info-snackbar {
+  background: #2e84ca !important;
+}
+.success-snackbar{
+  background: #1da84c !important;
+}
+.warn-snackbar {
+  background-color: #838a1f !important;
+  color: #000 i !important;
+}
+.error-snackbar {
+  background: #db2912 !important;
+}

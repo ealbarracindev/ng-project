@@ -23,16 +23,23 @@ export class TokenService {
     
   }
 
-  currentToken(): Token {
+  currentToken(): string | null {
     // TODO: Enable after implementation
-   const { access_token } = JSON.parse(localStorage.getItem('currentUser')!);
-   const token:Token={ access_token }
-   return  token;
+   let current = localStorage.getItem('currentUser');
+   if(!current){
+      return null;
+   } 
+   const { access_token } = JSON.parse(current!);
+   return access_token;
   }
 
   // Pass in function expiration date to check token 
   isTokenExpired():boolean { 
-    const { access_token } = JSON.parse(localStorage.getItem('currentUser')!);
+    let current = localStorage.getItem('currentUser');
+    if(!current){
+      return true;;
+    } 
+    const { access_token } = JSON.parse(current!);
     if (this.jwtHelper.isTokenExpired(access_token)) {
       console.log(true, 'token is expired')
       return true;

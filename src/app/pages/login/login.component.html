@@ -1,0 +1,69 @@
+<div class="login-picture-wrapper">
+  <div class="login-container">    
+    <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()" class="animate">
+      <mat-card class="login-card" align="center">
+      <mat-card-title>Login</mat-card-title>
+      <mat-card-subtitle>Ingrese con su cuenta</mat-card-subtitle>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input id="emailInput" matInput placeholder="Email" formControlName="email" autocomplete="email"
+                              type="email">
+                              <mat-icon matSuffix>email</mat-icon>
+                          <mat-error id="invalidEmailError" *ngIf="form.controls['email'].hasError('email')">
+                              Please enter a valid email address
+                          </mat-error>
+                          <mat-error id="requiredEmailError" *ngIf="form.controls['email'].hasError('required')">
+                              Email is
+                              <strong>required</strong>
+                          </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input id="passwordInput" matInput placeholder="Password" formControlName="password" type="password"
+              [type]="hide ? 'password' : 'text'" autocomplete="current-password">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <mat-error id="requiredPasswordError" *ngIf="form.controls['password'].hasError('required')">
+                  Password is
+                  <strong>required</strong>
+              </mat-error>
+            </mat-form-field> 
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="login-actions">  
+        <div class="row">
+          <div class="col">        
+            <button mat-raised-button color="primary" type="submit"
+            class="w-100 button"
+            [disabled]="form.invalid || loading">sigIn</button>            
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col">        
+            <button mat-raised-button color="warn" id="resetPassword"
+                  class="w-100 button" type="button"
+                  (click)="resetPassword()">reset password
+            </button>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col">
+            <button mat-raised-button color="basic" type="button" 
+            class="w-100 button"
+            (click)="register()">register</button>    
+          </div>
+        </div>
+      </mat-card-actions>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    </mat-card>   
+    </form>   
+  </div> 
+</div>
+ 
+
+

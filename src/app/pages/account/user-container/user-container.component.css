@@ -1,0 +1,30 @@
+.user-card {
+    position: absolute;
+    top: 0px;
+    left: 10px;
+    right: 0px;
+    bottom: 10px;
+  }
+  
+  .more-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+  }
+  
+  .user-list-card-content {
+    text-align: center;
+  }
+  
+  #add-button{
+  top: auto;
+  right: 20px;
+  bottom: 20px;
+  left: auto;
+}
+
+.card-title {
+    /* needed styles below */
+    display: flex;
+    justify-content: space-between;
+}

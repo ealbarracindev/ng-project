@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { SelectModel } from 'src/app/core/models/select-model';
+import { SelectModel } from '@core/models/select-model';
 
 @Component({
   selector: 'sc-single-selection',

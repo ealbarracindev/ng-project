@@ -1,0 +1,57 @@
+.full-width {
+  width: 100%;
+}
+
+.medium-width {
+  width: 60%;
+}
+
+.button{
+  width: 100%;
+  margin: 2px;
+}
+
+.login-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+}
+.login-card form {
+  padding: 20px;
+}
+
+.login-wrapper .example-form {
+  min-width: 100%;
+  max-width: 300px;
+  width: 100%;
+}
+
+.login-actions{
+  width: -webkit-fill-available;
+}
+
+.subtitle-info{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/*============================
+  Container
+==============================*/
+.login-container {
+  height: 100vh;
+}
+/*=============================
+picture wrapper 
+===============================*/
+.login-picture-wrapper{
+  background: linear-gradient(-225deg, rgba(0,0,0,0.6) 50%, rgba(0,36,61,0.6) 80%),
+  url(../../../assets/img/auth/login_bg.jpg);
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

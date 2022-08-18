@@ -1,0 +1,66 @@
+.full-width {
+    width: 100%;
+  }
+  
+  .medium-width {
+    width: 60%;
+  }
+  
+  .button{
+    width: 100%;
+    margin: 2px;
+  }
+  
+  .register-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+  }
+  .register-card form {
+    padding: 20px;
+  }
+  
+  .register-wrapper .example-form {
+    min-width: 100%;
+    max-width: 300px;
+    width: 100%;
+  }
+  
+  .register-actions{
+    width: -webkit-fill-available;
+  }
+  
+  .subtitle-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  
+  /*============================
+    Container
+  ==============================*/
+  .register-container {
+    height: 100vh;
+  }
+/*=============================
+picture wrapper 
+===============================*/
+.register-picture-wrapper{
+    background: linear-gradient(-225deg, rgba(0,0,0,0.6) 50%, rgba(0,36,61,0.6) 80%),
+    /* url(../../../assets/img/auth/login_bg.jpg); */
+    url(../../../../assets/img/auth/login_bg.jpg);
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/*=============================
+    gradient background 
+===============================*/
+.register-background{
+    background: #355C7D;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #C06C84, #6C5B7B, #355C7D);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #C06C84, #6C5B7B, #355C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}

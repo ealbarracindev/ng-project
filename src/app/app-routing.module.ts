@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LayoutComponent } from './components/layout/layout.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { LoginComponent } from './pages/login/login.component';
+
 
 const routes: Routes = [
   {
@@ -12,8 +14,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule),        
+    component:LoginComponent,
     title: 'App - Login'
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule),        
+    title: 'App - Auth'
   },
   {
     path: ``,

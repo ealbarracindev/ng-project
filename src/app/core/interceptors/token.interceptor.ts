@@ -9,16 +9,15 @@ import {
 import { catchError, Observable, retry, throwError } from 'rxjs';
 
 import { TokenService } from '../services/token.service';
-import { NotificationService } from '../services/notification.service';
 import { Router } from '@angular/router';
-import { Token } from '../models/auth.model';
+import { MessageService } from '@core/services/message.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
   constructor(
     private tokenService: TokenService,
-    private snackService: NotificationService,
+    private snackService: MessageService,
     private router: Router,
   ) {}
 
@@ -28,15 +27,16 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       retry(1),   
       catchError((error: HttpErrorResponse) => {
-          return this.handleError(error);      
+        this.handleError(error);      
+        return throwError( ()=>error );
       }));;
   }
 
   private addToken(request: HttpRequest<unknown>) {
     const token = this.tokenService.currentToken();
-    if (token.access_token && !this.tokenService.isTokenExpired()) {
+    if (token && !this.tokenService.isTokenExpired()) {
       const authReq = request.clone({
-        headers: request.headers.set('Authorization', `Bearer ${token.access_token}`)
+        headers: request.headers.set('Authorization', `Bearer ${token}`)
       });
       return authReq;
     }
@@ -109,13 +109,14 @@ export class TokenInterceptor implements HttpInterceptor {
 
         case 0:      //login
             //this.router.navigateByUrl("login");
+            this.snackService.info('No connection to provider');
             break;
        case 401:      //login
             this.snackService.info('Your session has expired');
             this.router.navigateByUrl("login");
             break;
         case 403:     //forbidden
-            this.router.navigateByUrl("unauthorized");
+            this.router.navigateByUrl("Unauthorized");
             break;
     }
      // Re-throw the error

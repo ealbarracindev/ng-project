@@ -4,12 +4,13 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 //import { MatDialog } from '@angular/material/dialog';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { User } from '../../../core/models/auth.model';
-import { ApiResponseError } from 'src/app/core/models/api-response-error';
+import { AuthService } from '@core/services/auth.service';
+import { User } from '@core/models/auth.model';
+import { ApiResponseError } from '@core/models/api-response-error';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-user-list',
+  selector: 'sc-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
@@ -40,7 +41,7 @@ export class UserListComponent implements OnInit {
        this.dataSource.data=resp
        this.dataSource.paginator = this.paginator;
        this.dataSource.sort = this.sort;
-    },error =>{
+    },(error:HttpErrorResponse) =>{
       console.log(error)
     })
   }
@@ -55,11 +56,11 @@ export class UserListComponent implements OnInit {
   }
   generate(){
       this.srvUser.getProfile()
-          .subscribe(resp=>{
+          .subscribe( (resp:User) =>{
               // resp.isSuccess 
               //     ? this.notificationService.success('Movimientos generados con éxito') 
               //     : this.notificationService.error('No se lograron generar los movimientos')
-          },error=>{
+          },(error:HttpErrorResponse)=>{
             this.apiError = new ApiResponseError().handlerCustomError(error);            
           });
   }

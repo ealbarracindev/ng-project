@@ -11,3 +11,8 @@ export interface User {
   name: string;
   email: string;
 }
+export interface UserInfo {
+  email: string;
+  alias: string;
+  fullName: string;
+}

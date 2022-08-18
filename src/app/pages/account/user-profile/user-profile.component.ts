@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/core/models/auth.model';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { User } from '@core/models/auth.model';
+import { AuthService } from '@core/services/auth.service';
 
 @Component({
-  selector: 'app-user-profile',
+  selector: 'sc-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-
+  user!:User;
   constructor(private readonly srvUser: AuthService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { this.loadProfile(); }
   loadProfile(){
     this.srvUser.getProfile().subscribe( (resp:User)=>{
-      
-   },error =>{
+        this.user = resp;
+   },(error:any) =>{
      console.log(error)
    });
   }
