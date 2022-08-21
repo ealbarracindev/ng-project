@@ -8,9 +8,10 @@ export interface Token {
 
 export interface User {
   id: string;
-  name: string;
   email: string;
+  name:string;
 }
+
 export interface UserInfo {
   email: string;
   alias: string;

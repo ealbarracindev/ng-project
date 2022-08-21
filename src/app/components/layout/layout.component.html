@@ -37,12 +37,12 @@
         </button>
         <mat-menu #notificationMenu="matMenu" xPosition="before" yPosition="above" 
           [overlapTrigger]="false">
-          <ng-container *ngIf="messages?.length; else elseTemplate">
+          <ng-container *ngIf="messages?.length; else empty">
             <a mat-menu-item *ngFor="let msg of messages">
               <span>{{msg.message}}</span>
             </a>  
           </ng-container>
-          <ng-template #elseTemplate>
+          <ng-template #empty>
             <a mat-menu-item>
               <span>Sin notificaciones</span>
             </a>
@@ -114,10 +114,12 @@
               <p mat-line> Users </p>
             </a>
     
-            <!-- <a mat-list-item [routerLink]="['/account/profile']">
-              <mat-icon mat-list-icon>person</mat-icon>
-              <p mat-line> Account </p>
-            </a> -->
+            <a id="push-bottom" mat-list-item [routerLink]="['/about']" routerLinkActive="active">
+              <mat-icon mat-list-icon>
+                info_outline
+              </mat-icon>
+              <p mat-line> About </p>
+            </a>
     
             <a mat-list-item [routerLink]="['/login']">
               <mat-icon mat-list-icon>exit_to_app</mat-icon>
@@ -147,12 +149,12 @@
               </mat-icon>
               <p mat-line> Material Components </p>
             </a>
-    
-            <a id="push-bottom" mat-list-item [routerLink]="['/about']" routerLinkActive="active">
+
+            <a mat-list-item href="https://www.typescriptlang.org/" target="_blank">
               <mat-icon mat-list-icon>
-                info_outline
+                link
               </mat-icon>
-              <p mat-line> About </p>
+              <p mat-line> TypeScript </p>
             </a>
           </mat-nav-list>
     
@@ -162,8 +164,9 @@
         <mat-sidenav-content class="sidenav-content">
           <!-- <app-breadcrumbs></app-breadcrumbs>
           <app-app-loader></app-app-loader> -->
-          
-          <router-outlet></router-outlet>
+          <div class="container">
+            <router-outlet></router-outlet>
+          </div>
     
           <!-- ============================================================== -->
             <!-- footer -->

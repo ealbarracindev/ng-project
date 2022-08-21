@@ -9,7 +9,7 @@
                           mat-fab
                           align="end"
                           matTooltip="Agregar usuario"
-                          (click)="add()"
+                          [routerLink]="['/account/new/']"
                         >
                         <i class="material-icons" >add</i>
                         </button>
@@ -21,7 +21,7 @@
         </mat-grid-tile>
         
         <!--ABMD-->
-        <ng-container *ngIf="u_profile === true;else second">
+        <ng-container>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-card class="user-card">
                         <mat-card-title>
@@ -33,33 +33,5 @@
                 </mat-card>
             </mat-grid-tile>
         </ng-container>
-        <ng-template #second>
-            <ng-container *ngIf="u_add === true;else third">
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                    <mat-card class="user-card">
-                        <mat-card-title>
-                            <h2>User add</h2>                          
-                        </mat-card-title>
-                    <mat-card-content class="user-list-card-content">
-                        <sc-user-create></sc-user-create>
-                    </mat-card-content>
-                </mat-card>
-                </mat-grid-tile>  
-            </ng-container>
-        </ng-template>
-        <ng-template #third></ng-template>
-
-        <!-- <ng-container *ngIf="u_profile === true; then first else second">
-            
-        </ng-container>
-        <ng-template #first>
-             
-        </ng-template>
-        <ng-template #second>Second</ng-template>
-        <ng-template #third>Third</ng-template> -->
-        
-
-        
-
     </mat-grid-list>
 </div>

@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-create.component.css']
 })
 export class UserCreateComponent implements OnInit {
-
+  title:string='Register'
+  subTitle:string='Registrese para disfrutar del sitio 😊';
+  redirect:string='account'
   constructor() { }
 
   ngOnInit(): void {

@@ -1,0 +1,63 @@
+
+<form [formGroup]="formRegister" class="form animate">           
+            <!--name--> 
+            <mat-form-field>
+                <input id="emailInput" matInput placeholder="Name" formControlName="name" type="text">
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-error id="requiredEmailError" *ngIf="formRegister.controls['name'].hasError('required')">
+                    Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <!--email--> 
+            <mat-form-field>
+                <input id="emailInput" matInput placeholder="Email" formControlName="email" autocomplete="email" type="email">
+                <mat-icon matSuffix>email</mat-icon>
+                <mat-error id="invalidEmailError" *ngIf="formRegister.controls['email'].hasError('email')">
+                    Please enter a valid email address
+                </mat-error>
+                <mat-error id="requiredEmailError" *ngIf="formRegister.controls['email'].hasError('required')">
+                    Email is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>            
+            <!--Contraseña-->   
+            <mat-form-field>
+                <input matInput placeholder="Ingrese una contraseña" formControlName="password"
+                [type]="hide ? 'password' : 'text'">
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-error *ngIf="formRegister.get('password')?.hasError('required')">
+                    The password is <strong>required</strong>
+                </mat-error>                    
+                <mat-error *ngIf="formRegister.get('password')?.hasError('minLength')">
+                    La contraseña debe contener un minímo de  <strong>{{minLength}} caracteres</strong>
+                </mat-error>                    
+            </mat-form-field>
+            <!--Confirm password-->
+            <mat-form-field *ngIf="formRegister.controls['password'].valid">
+                <input matInput placeholder="Confirm your password" formControlName="confirmPassword" 
+                    [type]="hide ? 'password' : 'text'">
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-error *ngIf="formRegister.controls['confirmPassword'].pristine 
+                        || formRegister.controls['confirmPassword'].errors?.MatchPassword">
+                        Las contraseñas no coinciden</mat-error>
+                <mat-error *ngIf="formRegister.get('confirmPassword')?.hasError('required')">
+                La contraseña es <strong>requerido</strong>
+                </mat-error>
+            </mat-form-field>   
+            <div class="row">
+                <div class="col">
+                    <button mat-raised-button color="primary" id="submit" 
+                        [disabled]="formRegister.invalid || loading"
+                        class="w-100 button"
+                        (click)="Register()">Registrarse</button>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <button mat-raised-button color="basic" id="cancel"
+                        class="w-100 button" type="button"                                    
+                        (click)="cancel()">Cancelar
+                    </button>
+                </div>
+            </div>
+</form>   
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>

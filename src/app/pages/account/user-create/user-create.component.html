@@ -1,1 +1,15 @@
-<p>user-create works!</p>
+<div class="register-container">
+    <mat-card align="center" class="m-5">
+        <mat-card-title>
+            <div class="text-center">
+                <h2 class="app-name">{{title}}</h2>
+            </div>
+        </mat-card-title>
+        <mat-card-subtitle>{{subTitle}}</mat-card-subtitle>
+        <mat-card-content>
+        <sc-user-register [title]="title" [subTitle]="subTitle" [redirect]="redirect"></sc-user-register>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+

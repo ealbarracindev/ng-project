@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserContainerComponent } from './user-container/user-container.component';
+import { UserCreateComponent } from './user-create/user-create.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 const routes: Routes = [
   { path:'', component: UserContainerComponent },
-  //{ path:'profile', component: UserContainerComponent, data: { breadcrumb:'profile'} }
-  //{ path:':id', component: UserListComponent }
+  { path:'new', component: UserCreateComponent, data: { breadcrumb:'register'} },
+  { path:'edit/:id', component: UserEditComponent }
 ];
 
 @NgModule({

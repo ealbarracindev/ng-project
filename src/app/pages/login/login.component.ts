@@ -37,7 +37,7 @@ export class LoginComponent {
       const { email, password } = this.form.getRawValue();
       this.auth.login(email, password)
       .subscribe({
-          next: (value:LoginRta) => {
+        next: (value:LoginRta) => {
           this.loading=false
           this.router.navigate(['/dashboard']);        
         },

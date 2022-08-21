@@ -13,6 +13,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 
 import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AccountModule } from '../account/account.module';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    AccountModule
   ]
 })
 export class AuthModule { }

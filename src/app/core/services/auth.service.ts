@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, catchError, of, throwError } from 'rxjs';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 import { environment as env } from '@env/environment';
 import { LoginRta, User, UserInfo } from '@core/models/auth.model';
 import { TokenService } from './token.service';
-import { IRegister } from '@pagesauth/register/register';
-import { ReqResponseData } from '@coremodels/req-response-data';
-import { IRegisterResponse } from '@pagesauth/register/register-response';
+
+import { IUserCreateDto, IUserDto } from '@coreinterfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -67,9 +66,33 @@ export class AuthService {
     )
   }
 
-  register(register:IRegister){
-    const {email, password}=register;
-    return this.http.post<LoginRta>(`${env.API_URL}/user/register`,{ email,password })
+  setAuthState(user: User | null) {
+    this.authState.next(user);
+  }
+
+  getProfile() {
+    const url = `${env.API_URL}/user/profile`;
+    return this.http.get<User>(url);
+  }
+
+  currentUser():UserInfo | null{
+    let current = localStorage.getItem('currentUser');
+    if(!current) return null;
+    
+    const { email, alias, fullName }:UserInfo = JSON.parse(current!);
+    return { email,alias,fullName };
+  }
+
+  getAll():Observable<User[]> {
+    return this.http.get<User[]>( `${env.API_URL}/user` );
+  }
+
+  getById(id:string):Observable<User> {
+    return this.http.get<User>( `${env.API_URL}/user/${id}` );
+  }
+
+  register(register:IUserCreateDto){
+    return this.http.post<LoginRta>(`${env.API_URL}/user/register`,register)
     .pipe(
       tap( (response:LoginRta) => {
         
@@ -92,28 +115,18 @@ export class AuthService {
       ),
     )
   }
-
-  setAuthState(user: User | null) {
-    this.authState.next(user);
+  
+  create(create:IUserCreateDto):Observable<IUserDto> {
+    return this.http.post<IUserDto>( `${env.API_URL}/user`,create );
   }
 
-  getProfile() {
-    const url = `${env.API_URL}/user/profile`;
-    return this.http.get<User>(url);
+  update(update:IUserDto):Observable<IUserDto> {
+    return this.http.put<IUserDto>( `${env.API_URL}/user`,update );
   }
 
-  currentUser():UserInfo | null{
-    let current = localStorage.getItem('currentUser');
-    if(!current) return null;
-    
-    const { email, alias, fullName }:UserInfo = JSON.parse(current!);
-    return { email,alias,fullName };
+  delete(id:string) {
+    return this.http.delete( `${env.API_URL}/user/${id}` );
   }
-  getAll():Observable<User[]> {
-    const url = `${env.API_URL}/user`;
-    return this.http.get<User[]>(url);
-  }
-
 
   logout() {
     this.tokenService.clearToken();

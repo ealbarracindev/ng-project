@@ -8,8 +8,8 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./user-container.component.css']
 })
 export class UserContainerComponent implements OnInit {
-  u_add:boolean=false;
-  u_edit:boolean=false;
+  // u_add:boolean=false;
+  // u_edit:boolean=false;
   u_profile:boolean=false;
 
   constructor(private breakpointObserver: BreakpointObserver) { }
@@ -35,14 +35,7 @@ export class UserContainerComponent implements OnInit {
     })
   );
 
-  ngOnInit(): void {
-      this.u_profile = true;
-  }
+  ngOnInit(): void {}
 
-  add(){
-    this.u_profile =! this.u_profile;
-    this.u_add =! this.u_add;
-    this.u_edit =! this.u_edit;
-    console.log('show actions-->',this.u_profile, this.u_add,this.u_edit);
-  }
+  add(){  }
 }

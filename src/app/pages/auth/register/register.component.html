@@ -1,72 +1,15 @@
 <div class="register-picture-wrapper">
     <div class="register-container">
-        <form [formGroup]="formRegister" class="animate">
-            <mat-card class="register-card" align="center">
-                <mat-card-title>
-                    <div class="text-center">
-                        <h2 class="app-name">E-Money</h2>
-                    </div>
-                </mat-card-title>
-                <mat-card-subtitle>Registrese para disfrutar del sitio</mat-card-subtitle>
-                <mat-card-content>
-
-                    <mat-form-field class="full-width">
-                        <input id="emailInput" matInput placeholder="Email" formControlName="email" autocomplete="email" type="email">
-                        <mat-icon matSuffix>email</mat-icon>
-                        <mat-error id="invalidEmailError" *ngIf="formRegister.controls['email'].hasError('email')">
-                            Please enter a valid email address
-                        </mat-error>
-                        <mat-error id="requiredEmailError" *ngIf="formRegister.controls['email'].hasError('required')">
-                            Email is
-                            <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
-                    <!--Contraseña-->   
-                    <mat-form-field class="full-width">
-                        <input matInput placeholder="Ingrese una contraseña" formControlName="password"
-                        [type]="hide ? 'password' : 'text'">
-                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        <mat-error *ngIf="formRegister.get('password')?.hasError('required')">
-                            La contraseña es <strong>requerido</strong>
-                        </mat-error>                    
-                        <mat-error *ngIf="formRegister.get('password')?.hasError('minLength')">
-                            La contraseña debe contener un minímo de  <strong>{{minLength}} caracteres</strong>
-                        </mat-error>                    
-                    </mat-form-field>
-                    <!--Confirm password-->
-                    <mat-form-field *ngIf="formRegister.controls['password'].valid" class="full-width">
-                        <input matInput placeholder="Confirm your password" formControlName="confirmPassword" 
-                            [type]="hide ? 'password' : 'text'">
-                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        <mat-error *ngIf="formRegister.controls['confirmPassword'].pristine 
-                                || formRegister.controls['confirmPassword'].errors?.MatchPassword">
-                                Las contraseñas no coinciden</mat-error>
-                        <mat-error *ngIf="formRegister.get('confirmPassword')?.hasError('required')">
-                        La contraseña es <strong>requerido</strong>
-                        </mat-error>
-                    </mat-form-field>    
-                </mat-card-content>
-
-                <mat-card-actions class="register-actions">
-                    <div class="row">
-                        <div class="col">
-                            <button mat-raised-button color="primary" id="submit" 
-                                [disabled]="formRegister.invalid || loading"
-                                class="w-100 button"
-                                (click)="Register()">Registrarse</button>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col">
-                            <button mat-raised-button color="basic" id="cancel"
-                                class="w-100 button" type="button"                                    
-                                (click)="cancel()">Cancelar
-                            </button>
-                        </div>
-                    </div>
-                </mat-card-actions>
-                <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-            </mat-card>
-        </form>    
+        <mat-card class="register-card" align="center">
+            <mat-card-title>
+                <div class="text-center">
+                    <h2 class="app-name">{{title}}</h2>
+                </div>
+            </mat-card-title>
+            <mat-card-subtitle>{{subTitle}}</mat-card-subtitle>
+            <mat-card-content>
+            <sc-user-register [title]="title" [subTitle]="subTitle"></sc-user-register>
+            </mat-card-content>
+        </mat-card>
     </div>
 </div>

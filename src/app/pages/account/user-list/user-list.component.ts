@@ -3,11 +3,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
-//import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '@core/services/auth.service';
 import { User } from '@core/models/auth.model';
 import { ApiResponseError } from '@core/models/api-response-error';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UserDeleteComponent } from '../user-delete/user-delete.component';
+import { IUserCreateDto } from '@coreinterfaces/user.interface';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'sc-user-list',
@@ -26,9 +28,9 @@ export class UserListComponent implements OnInit {
   apiError!:ApiResponseError;
   //==========================
   constructor(
-    //public dialog: MatDialog,
-    private route: ActivatedRoute,
-    private readonly srvUser: AuthService
+    public _dialog: MatDialog,
+    private _route: ActivatedRoute,
+    private readonly _srvUser: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +39,7 @@ export class UserListComponent implements OnInit {
 
   private loadList(): void {
     this.dataSource.sort = this.sort;
-    this.srvUser.getAll().subscribe( (resp:User[])=>{
+    this._srvUser.getAll().subscribe( (resp:User[])=>{
        this.dataSource.data=resp
        this.dataSource.paginator = this.paginator;
        this.dataSource.sort = this.sort;
@@ -54,8 +56,9 @@ export class UserListComponent implements OnInit {
     }
     this.dataSource.filter = filterValue;
   }
+
   generate(){
-      this.srvUser.getProfile()
+      this._srvUser.getProfile()
           .subscribe( (resp:User) =>{
               // resp.isSuccess 
               //     ? this.notificationService.success('Movimientos generados con éxito') 
@@ -64,6 +67,7 @@ export class UserListComponent implements OnInit {
             this.apiError = new ApiResponseError().handlerCustomError(error);            
           });
   }
+
   manejarError(error:any) {
     if (error && error.error) {
       console.log(error);
@@ -72,27 +76,23 @@ export class UserListComponent implements OnInit {
 
   deleteRow(i:number,row:User){
     let index=i
-    // const dialogo3 = this.dialog.open(GastosDeleteComponent, {
-    //   data: row
-    // });
-    // dialogo3.afterClosed().subscribe(art => {
-    //   if (art != undefined)
-    //     this.eliminar(index,art);
-    // });
+    const dialogo3 = this._dialog.open(UserDeleteComponent, {
+      data: row
+    });
+    dialogo3.afterClosed().subscribe( (art:IUserCreateDto) => {
+      if (art != undefined)
+        this.delete(index,row);
+    });
 
   }
   private delete(index:number,result: User) { 
-    //console.log('eliminar gasto '+index+'--------------'+result.IdEmpresa)
-    // this.gastosService.delete(result.id).subscribe(resp=>{
-    //   if(resp.isSuccess){
-    //     this.removeAt(index)
-    //     this.notificationService.success('Datos eliminados con éxito!');
-    //   }else{
-    //       this.notificationService.error('No se pudo eliminar el encuentro');
-    //   }  
-    // });    
+    console.log('remove user '+index+' -------------- '+ result.id)
+    this._srvUser.delete(result.id).subscribe( resp =>{
+        this._removeAt(index);        
+    });    
   }
-  removeAt(index: number) {
+
+  private _removeAt(index: number) {
     const data = this.dataSource.data;
     data.splice((this.paginator.pageIndex * this.paginator.pageSize) + index, 1);
 

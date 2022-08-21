@@ -1,0 +1,36 @@
+.full-width {
+    width: 100%;
+  }
+  
+  .medium-width {
+    width: 60%;
+  }
+  
+  .button{
+    width: 100%;
+    margin: 2px;
+  }
+  
+  .form{
+    display: grid;
+  }
+  .register-card form {
+    padding: 20px;
+  }
+  
+  /* .register-wrapper .example-form {
+    min-width: 100%;
+    max-width: 300px;
+    width: 100%;
+  }
+  
+  .register-actions{
+    width: -webkit-fill-available;
+  }
+  
+  .subtitle-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  } */
+
